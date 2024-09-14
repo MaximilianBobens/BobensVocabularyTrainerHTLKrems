@@ -1,0 +1,69 @@
+﻿
+@page "/flashcards/{year:int}/{unit:int}"
+@code {
+    
+    [Parameter]
+    public int Year { get; set; }
+    [Parameter]
+    public int Unit { get; set; }
+
+    private List<VocabularyCard> vocabCards;
+    private int currentCardIndex = 0;
+    private string userInput = "";
+
+    protected override void OnInitialized()
+    {
+        // Beispielhafte Vokabelkarten laden
+        vocabCards = LoadVocabularyCards(Year, Unit);
+    }
+
+    private List<VocabularyCard> LoadVocabularyCards(int year, int unit)
+    {
+        // Hier würdest du echte Daten laden
+        return new List<VocabularyCard>
+        {
+            new VocabularyCard { Id = 1, German = "Haus", English = "House" },
+            new VocabularyCard { Id = 2, German = "Auto", English = "Car" }
+        };
+    }
+
+    private void CheckAnswer()
+    {
+        if (vocabCards[currentCardIndex].English.Equals(userInput, StringComparison.OrdinalIgnoreCase))
+        {
+            vocabCards[currentCardIndex].IsLearned = true;
+            // Fortschritt speichern (z.B. in einer Datenbank oder in localStorage)
+            SaveProgress();
+        }
+        else
+        {
+            // Feedback für falsche Antwort
+        }
+        // Zur nächsten Karte gehen
+        if (currentCardIndex < vocabCards.Count - 1)
+        {
+            currentCardIndex++;
+        }
+        else
+        {
+            // Alle Karten dieser Einheit sind fertig
+        }
+        userInput = "";
+    }
+
+    private void SaveProgress()
+    {
+        // Fortschritt speichern, z.B. mit localStorage oder in einer Datenbank
+    }
+}
+
+<h3>Einheit @Unit - Jahrgang @Year</h3>
+
+@if (vocabCards != null && vocabCards.Count > 0)
+{
+    <div>
+        <p>@vocabCards[currentCardIndex].German</p>
+        <input type="text" @bind="userInput" />
+        <button @onclick="CheckAnswer">Antwort überprüfen</button>
+    </div>
+}

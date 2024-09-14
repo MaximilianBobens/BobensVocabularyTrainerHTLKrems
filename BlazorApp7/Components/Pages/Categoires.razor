@@ -1,0 +1,12 @@
+﻿@page "/categories"
+
+<h3>Kategorien auswählen</h3>
+
+@for (int year = 1; year <= 5; year++)
+{
+    <h4>Jahrgang @year</h4>
+    @for (int unit = 1; unit <= 8; unit++)
+    {
+        <a href="/flashcards/@year/@unit">Einheit @unit</a><br />
+    }
+}

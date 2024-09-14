@@ -1,0 +1,23 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu /> <!-- Navigation to choose Year, Unit, and other sections -->
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <h1>Vocabulary Learning Dashboard</h1> <!-- Custom header for your app -->
+        </div>
+
+        <article class="content px-4">
+            @Body <!-- Content of the current page (e.g., flashcards, progress) -->
+        </article>
+    </main>
+</div>
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>

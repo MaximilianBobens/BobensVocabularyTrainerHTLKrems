@@ -1,0 +1,51 @@
+﻿@page "/dashboard"
+
+@code {
+    private List<Progress> progressList;
+
+    protected override void OnInitialized()
+    {
+        // Beispielhafte Fortschrittdaten laden
+        progressList = LoadProgress();
+    }
+
+    private List<Progress> LoadProgress()
+    {
+        return new List<Progress>
+        {
+            new Progress { Year = 1, Unit = 1, TotalWords = 10, LearnedWords = 5 },
+            new Progress { Year = 2, Unit = 2, TotalWords = 8, LearnedWords = 8 }
+        };
+    }
+}
+
+<h3>Dein Fortschritt</h3>
+
+@if (progressList != null && progressList.Count > 0)
+{
+    <table>
+        <thead>
+        <tr>
+            <th>Jahrgang</th>
+            <th>Einheit</th>
+            <th>Gelernt</th>
+            <th>Gesamt</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var progress in progressList)
+        {
+            <tr>
+                <td>@progress.Year</td>
+                <td>@progress.Unit</td>
+                <td>@progress.LearnedWords</td>
+                <td>@progress.TotalWords</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Kein Fortschritt vorhanden</p>
+}
